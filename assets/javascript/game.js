@@ -10,26 +10,29 @@ var currentLetter;
             var i;
             i = Math.floor(Math.random()*wordList.length);
 
-//print _ word.lenght no of times    
+//print _ word.lenght no of times
+            console.log("printing _ ");
             for(var j=0;j<wordList[i].length;j++){
                 $("#word-guess").append("_ ");
             };
 //if noOfTry >0 get input from user, store it in var currentLetter, decrease noOfTry by 1
             if(noOfTry>0){
                 document.onkeyup = function(event){
+                    console.log("run key press event");
                     currentLetter = event.key.toLowerCase();
                     noOfTry--;
-                    for(j=0; j<wordList[i].length;j++){
-                        $("#word-guess").append("");
-                    };
+                    $("#word-guess").empty();
 //loop through each letter of the word, if currentLetter matches with the letter print the letter and apped it to foundLetters var, if no match print _ instead
                     for(j=0;j<wordList[i].length;j++){
                         var added=false;
+                        console.log("go thorough each letter of the word");
                         if(wordList[i][j]===currentLetter){
-                           $(foundLetters).append(currentLetter);
+                           console.log("append each found letter");
+                            $(foundLetters).append(currentLetter);
                         };
                         for(z=0; z<foundLetters.length;z++){
                             if(foundLetters[z]===wordList[i][j]){
+                                console.log("found letter")
                                 $("#word-guess").append(foundLetters[z]+" ");
                                 added = true;
                             };
