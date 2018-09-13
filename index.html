@@ -16,16 +16,25 @@
     <!-- header -->
     <h1 class="jumbotron">Word Guess Game</h1>
     <!-- rules -->
-    <ul class="list-group">
-        <li class="list-group-item">You get 10 guesses</li>
-        <li class="list-group-item">Letters you guessed will be displayed at their location</li>
-        <li class="list-group-item" id="currentStatus"></li>
-    </ul>
-    <!-- start button -->
-    <button type="button" class="btn btn-primary" id="start">start</button>
-    <!-- display word -->
-    <p id="word-guess"></p>
-    <!-- display number of wins -->
-    <p id="noOfWins"></p>
+    <div class="row">
+        <div class="col-md-6">
+            <img id="hint-img" class="hintImg">
+        </div>
+        <div class="col-md-6">
+            <ul class="list-group">
+                <li class="list-group-item">You get 10 guesses</li>
+                <li class="list-group-item">Letters you guessed will be displayed at their location</li>
+                <li class="list-group-item" id="currentStatus"></li>
+            </ul>
+                <!-- start button -->
+                <button type="button" class="btn btn-primary" id="start">start</button>
+                <!-- display word -->
+                <p id="word-guess"></p>
+                <audio></audio>
+                <!-- display number of wins -->
+                <p id="noOfWins"></p>
+        </div>
+    </div>
+
 </body>
 </html>>
