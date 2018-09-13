@@ -1,4 +1,4 @@
-var wordList = ["Harry", "voldermort", "Hermione", "Draco", "Rubeus", "Dobby", "Albus", "Severus", "Weasley", "Luna", "Ginny","Bellatrix"];
+var wordList = ["Harry", "Voldermort", "Hermione", "Draco", "Rubeus", "Dobby", "Albus", "Severus", "Weasley", "Luna", "Ginny","Bellatrix"];
 var hintImg = ["https://imgix.bustle.com/rehost/2016/9/13/c4e178d0-3a13-4e16-b25f-5356bc679747.jpg?w=970&h=582&fit=crop&crop=faces&auto=format&q=70",
                 "https://hips.hearstapps.com/hmg-prod.s3.amazonaws.com/images/screen-shot-2017-03-20-at-12-43-34-1490014393.jpg?crop=0.855xw:1.00xh;0.145xw,0&resize=980:*",
                 "https://www.hbook.com/wp-content/uploads/2014/11/book-stack.jpg",
@@ -34,10 +34,13 @@ var currentLetter;
             };
 //if noOfTry >0 get input from user, store it in var currentLetter, decrease noOfTry by 1
             document.onkeyup = function(event){
-                console.log("foundLetters.length: "+foundLetters.length+", wordList["+i+"].length: "+ wordList[i].length);
+                function onlyUnique(value, index,self){
+                    return self.indexOf(value) === index;
+                }
+                // console.log("foundLetters.length: "+foundLetters.length+", wordList["+i+"].length: "+ wordList[i].length);
                 if(noOfTry>0){
                     if(foundLetters.length != wordList[i].length){
-                        console.log("run key press event");
+                        // console.log("run key press event");
                         currentLetter = event.key.toLowerCase();
                         noOfTry--;
                         $("#currentStatus").text("No of tries left: "+noOfTry);
@@ -45,21 +48,19 @@ var currentLetter;
 //loop through e    ach letter of the word, if currentLetter matches with the letter print the letter and apped it to foundLetters var, if no match print _ instead
                         for(var k=0;k<wordList[i].length;k++){
                             var added=false;
-                            console.log("go thorough each letter of the word");
-                            if(wordList[i][k]===currentLetter){
-                               console.log("append each found letter");
+                            // console.log("current letter: "+currentLetter+", wordList: "+wordList[i][k]);
+                            if(currentLetter===wordList[i][k].toLowerCase()){
+                            //    console.log("append each found letter");
                                 foundLetters.push(currentLetter);
-                                console.log(foundLetters);
+                                // console.log(foundLetters);
                             };
                             
-                            function onlyUnique(value, index,self){
-                                return self.indexOf(value) === index;
-                            }
+
                             uniFoundLetters = foundLetters.filter(onlyUnique);
-                            console.log(uniFoundLetters);
+                            // console.log(uniFoundLetters);
                             for(z=0; z<uniFoundLetters.length;z++){
-                                if(uniFoundLetters[z]===wordList[i][k]){
-                                    console.log("found letter")
+                                if(uniFoundLetters[z]===wordList[i][k].toLowerCase()){
+                                    // console.log("found letter: "+uniFoundLetters[z]);
                                     $("#word-guess").append(uniFoundLetters[z]+" ");
                                     added = true;
                                 };
@@ -71,7 +72,11 @@ var currentLetter;
 //if foundLetter    s.length === currentLetter increment noOfWin by 1
                     }else{
                         $("#currentStatus").text("You Win");
-
+                        $("<audio></audio>").attr({
+                            'src':'assets/audio/Short_triumphal_fanfare-John_Stracke-815794903.mp3',
+                            'volume':0.4,
+                            'autoplay':'autoplay'
+                        });
                         $("#word-guess").empty();
                     };
                 }else{
