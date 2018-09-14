@@ -22,11 +22,13 @@ var currentLetter;
 //randomly choose a word
         $("#start").on("click", function(){
             var i;
+            // counting the length of identified letters
+            var lenFound = 0;
             i = Math.floor(Math.random()*wordList.length);
             // show hint image
             $("#hint-img").attr("src",hintImg[i]);
             foundLetters.length = 0;
-            var noOfTry= 10;
+            var noOfTry= 11;
 //print _ word.lenght no of times
             console.log("printing _ ");
             for(var j=0;j<wordList[i].length;j++){
@@ -39,8 +41,11 @@ var currentLetter;
                 }
                 // console.log("foundLetters.length: "+foundLetters.length+", wordList["+i+"].length: "+ wordList[i].length);
                 if(noOfTry>0){
-                    if(foundLetters.length != wordList[i].length){
+                    console.log(wordList[i]);
+                    console.log(foundLetters);
+                    if(lenFound != wordList[i].length){
                         // console.log("run key press event");
+                        lenFound=0;
                         currentLetter = event.key.toLowerCase();
                         noOfTry--;
                         $("#currentStatus").text("No of tries left: "+noOfTry);
@@ -48,6 +53,7 @@ var currentLetter;
 //loop through e    ach letter of the word, if currentLetter matches with the letter print the letter and apped it to foundLetters var, if no match print _ instead
                         for(var k=0;k<wordList[i].length;k++){
                             var added=false;
+                            
                             // console.log("current letter: "+currentLetter+", wordList: "+wordList[i][k]);
                             if(currentLetter===wordList[i][k].toLowerCase()){
                             //    console.log("append each found letter");
@@ -63,6 +69,8 @@ var currentLetter;
                                     // console.log("found letter: "+uniFoundLetters[z]);
                                     $("#word-guess").append(uniFoundLetters[z]+" ");
                                     added = true;
+                                    lenFound++;
+                                    console.log(lenFound);
                                 };
                             };
                             if(added === false){
